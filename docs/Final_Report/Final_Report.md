@@ -49,34 +49,65 @@ All system artifacts are organized within the repository structure. Below is the
 Below is the graph log of all commits in the repository history, illustrating clean branch integrations and structural commit prefix rules compliance:
 
 ```text
-* 0c81f1d INFRA: Added Pull Request process guide and GitHub templates
-* 4a3ca66 INFRA: Added Documentation Quality Assurance and Review Plan
-*   cd24304 INFRA: Merge doc3-userguide into develop
+*   3431ac7 INFRA: Merge develop into main - fix Gantt chart text overlap
 |\  
-| * d017b8d DOC3: Added User Validation and Verification log report
-| * a2fea0a DOC3: Created OpenAPI REST API specifications reference guide
-| * 93a9c50 DOC3: Created QA Test Verification and Report manual
-| * 3ba5387 DOC3: Created Installation and Deployment Guide
-| * 9e14049 DOC3: Created clinical User Manual guide
-| * 1d1aa1c DOC3: Initialized Phase 4 with documentation type index
+| * 67e29f2 INFRA: Fix Gantt chart text overlap by compressing date range to widen task bars
+* | 9cf74bd INFRA: Merge develop into main - visual diagram enhancements
+|\| 
+| * 2d60fb4 INFRA: Enhance all Mermaid diagrams with color styling and visual improvements
+* | 33f2313 INFRA: Merge develop into main - fix all Mermaid v8.8.0 diagram syntax
+|\| 
+| * 99a0fc7 INFRA: Fix all Mermaid diagrams for GitHub v8.8.0 compatibility
+* | e44e2e8 INFRA: Merge develop into main - fix Mermaid v8.8.0 Gantt syntax
+|\| 
+| * e147d77 INFRA: Fix Gantt chart Mermaid syntax for GitHub v8.8.0 compatibility
+* | 1252e10 INFRA: Merge develop into main – complete project v1.0-FINAL with diagrams, templates, and full appendices
+|\| 
+| * 2dd572a INFRA: Added UML diagram files, reusable templates, Gantt chart, and enhanced README and Final Report appendices
+* | 94ab6f7 INFRA: Merge develop into main for final project v1.0-FINAL release
+|\| 
+| *   24777ae INFRA: Merge final-report into develop
+| |\  
+| | * 2aad5f2 REPORT: Finalized Final Report delivery status checkmarks
+| | * 510238e REPORT: Added Final Report peer review and audit approval log
+| | * 875bf35 REPORT: Appended Final Report structure including activities, VC details, challenges, and status
+| | * aec6569 REPORT: Initialized Final Report and compiled project artifacts catalog
+| |/  
+| * 0c81f1d INFRA: Added Pull Request process guide and GitHub templates
+| * 4a3ca66 INFRA: Added Documentation Quality Assurance and Review Plan
+* | f46eb2a INFRA: Merge develop into main for DOC3 v1.0-DOC3 baseline
+|\| 
+| *   cd24304 INFRA: Merge doc3-userguide into develop
+| |\  
+| | * d017b8d DOC3: Added User Validation and Verification log report
+| | * a2fea0a DOC3: Created OpenAPI REST API specifications reference guide
+| | * 93a9c50 DOC3: Created QA Test Verification and Report manual
+| | * 3ba5387 DOC3: Created Installation and Deployment Guide
+| | * 9e14049 DOC3: Created clinical User Manual guide
+| | * 1d1aa1c DOC3: Initialized Phase 4 with documentation type index
+| |/  
+* | 2e7ce26 INFRA: Merge develop into main for SDD v1.0-SDD baseline
+|\| 
+| *   e229e63 INFRA: Merge doc2-design into develop
+| |\  
+| | * 4f2c8bb DOC2: Added SDD peer review and architectural inspection log
+| | * 2837a68 DOC2: Added Section 7 user interface and API specifications to SDD
+| | * a07f74c DOC2: Added Section 5 database design and indices schema to SDD
+| | * 4743edf DOC2: Added Section 4 system architecture to SDD
+| | * ee2ceb0 DOC2: Added Mermaid UML diagrams to SDD
+| | * e17a956 DOC2: Initialized SDD document with introduction and component decomposition
+| |/  
+* | a377015 INFRA: Merge develop into main for SRS v1.0-SRS baseline
+|\| 
+| *   a8fd223 INFRA: Merge doc1-requirements into develop
+| |\  
+| | * f754d3a DOC1: Added SRS peer review and inspection approval log
+| | * 6059822 DOC1: Added detailed functional, non-functional, and interface requirements
+| | * e4d75b7 DOC1: Added Section 2 overall description to SRS
+| | * 4273668 DOC1: Initialized SRS document with purpose, audience, objectives, scope, and references
+| |/  
+| * a58d3ad INFRA: Added documentation and repository standards guide
 |/  
-*   e229e63 INFRA: Merge doc2-design into develop
-|\  
-| * 4f2c8bb DOC2: Added SDD peer review and architectural inspection log
-| * 2837a68 DOC2: Added Section 7 user interface and API specifications to SDD
-| * a07f74c DOC2: Added Section 5 database design and indices schema to SDD
-| * 4743edf DOC2: Added Section 4 system architecture to SDD
-| * ee2ceb0 DOC2: Added Mermaid UML diagrams to SDD
-| * e17a956 DOC2: Initialized SDD document with introduction and component decomposition
-|/  
-*   a8fd223 INFRA: Merge doc1-requirements into develop
-|\  
-| * f754d3a DOC1: Added SRS peer review and inspection approval log
-| * 6059822 DOC1: Added detailed functional, non-functional, and interface requirements
-| * e4d75b7 DOC1: Added Section 2 overall description to SRS
-| * 4273668 DOC1: Initialized SRS document with purpose, audience, objectives, scope, and references
-|/  
-* a58d3ad INFRA: Added documentation and repository standards guide
 * 6d9b30b Initialize project structure and configuration
 ```
 
@@ -219,8 +250,23 @@ Review logs and audit trails are documented in:
 Below is the complete annotated branch-graph log representing the full project documentation lifecycle as committed and merged into the repository:
 
 ```text
-*   94ab6f7 INFRA: Merge develop into main for final project v1.0-FINAL release
+*   3431ac7 INFRA: Merge develop into main - fix Gantt chart text overlap
 |\  
+| * 67e29f2 INFRA: Fix Gantt chart text overlap by compressing date range to widen task bars
+* | 9cf74bd INFRA: Merge develop into main - visual diagram enhancements
+|\| 
+| * 2d60fb4 INFRA: Enhance all Mermaid diagrams with color styling and visual improvements
+* | 33f2313 INFRA: Merge develop into main - fix all Mermaid v8.8.0 diagram syntax
+|\| 
+| * 99a0fc7 INFRA: Fix all Mermaid diagrams for GitHub v8.8.0 compatibility
+* | e44e2e8 INFRA: Merge develop into main - fix Mermaid v8.8.0 Gantt syntax
+|\| 
+| * e147d77 INFRA: Fix Gantt chart Mermaid syntax for GitHub v8.8.0 compatibility
+* | 1252e10 INFRA: Merge develop into main – complete project v1.0-FINAL with diagrams, templates, and full appendices
+|\| 
+| * 2dd572a INFRA: Added UML diagram files, reusable templates, Gantt chart, and enhanced README and Final Report appendices
+* | 94ab6f7 INFRA: Merge develop into main for final project v1.0-FINAL release
+|\| 
 | *   24777ae INFRA: Merge final-report into develop
 | |\  
 | | * 2aad5f2 REPORT: Finalized Final Report delivery status checkmarks
@@ -231,7 +277,7 @@ Below is the complete annotated branch-graph log representing the full project d
 | * 0c81f1d INFRA: Added Pull Request process guide and GitHub templates
 | * 4a3ca66 INFRA: Added Documentation Quality Assurance and Review Plan
 * | f46eb2a INFRA: Merge develop into main for DOC3 v1.0-DOC3 baseline
-|\|
+|\| 
 | *   cd24304 INFRA: Merge doc3-userguide into develop
 | |\  
 | | * d017b8d DOC3: Added User Validation and Verification log report
@@ -242,7 +288,7 @@ Below is the complete annotated branch-graph log representing the full project d
 | | * 1d1aa1c DOC3: Initialized Phase 4 with documentation type index
 | |/  
 * | 2e7ce26 INFRA: Merge develop into main for SDD v1.0-SDD baseline
-|\|
+|\| 
 | *   e229e63 INFRA: Merge doc2-design into develop
 | |\  
 | | * 4f2c8bb DOC2: Added SDD peer review and architectural inspection log
@@ -253,7 +299,7 @@ Below is the complete annotated branch-graph log representing the full project d
 | | * e17a956 DOC2: Initialized SDD document with introduction and component decomposition
 | |/  
 * | a377015 INFRA: Merge develop into main for SRS v1.0-SRS baseline
-|\|
+|\| 
 | *   a8fd223 INFRA: Merge doc1-requirements into develop
 | |\  
 | | * f754d3a DOC1: Added SRS peer review and inspection approval log
