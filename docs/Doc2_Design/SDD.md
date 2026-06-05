@@ -240,3 +240,71 @@ sequenceDiagram
     deactivate Server
     UI->>User: Draws bounding boxes & progress indicators on canvas
 ```
+
+---
+
+## 4. System Architecture
+
+The system is designed around a **decoupled 4-Tier Layered Architecture** to enforce separation of concerns, improve maintainability, and ensure that resource-intensive deep learning inference does not block client UI updates or database operations.
+
+```text
++-------------------------------------------------------------+
+| Presentation Layer (Web Client Interface)                   |
+| - Vanilla JS Runtime   - HTML5 Canvas   - CSS Layouts       |
++------------------------------+------------------------------+
+                               | HTTPS Requests (JSON payloads)
+                               v
++-------------------------------------------------------------+
+| Business Logic Layer (Python Web API Backend)              |
+| - Request Routers      - JWT Middleware - DICOM Parser      |
++--------------------+---------------------+------------------+
+                     |                     |
+     NumPy Tensors   v                     v Local SQLite Queries
++--------------------------+    +-----------------------------+
+| AI Detection Layer       |    | Database Layer              |
+| - PyTorch CNN Engine     |    | - SQLite Persistence        |
+| - CUDA Hardware Driver   |    | - DICOM Local Storage       |
++--------------------------+    +-----------------------------+
+```
+
+### 4.1 Architecture Overview
+By separating the presentation, business logic, AI execution, and data storage:
+- **Scalability:** The AI execution module can run on dedicated GPU hardware nodes while the backend and frontend run on lightweight web server instances.
+- **Resilience:** Model exceptions or memory crashes are isolated to the AI detection layer, allowing the web server to remain operational.
+- **Traceability:** UI client elements do not interact directly with the database, maintaining security boundaries.
+
+### 4.2 Presentation Layer
+The front-end client interface operates entirely within the user's web browser:
+- **Technology Stack:** HTML5, CSS3 (Vanilla stylesheets), and Vanilla ES6 JavaScript (avoiding heavy external framework dependencies to maintain minimal bundle sizes).
+- **Core Responsibilities:**
+  - **Session Controller:** Securely manages token authentication (storing JWTs in session storage) and page redirect routing.
+  - **DICOM Canvas Renderer:** Renders pixel matrices side-by-side with demographic details, and draws canvas bounding box outlines indicating pathological zones.
+  - **UI Events Handler:** Manages interactive user features, file selection drag-and-drop actions, and API request status notifications (loading spinners, error banners).
+
+### 4.3 Business Logic Layer
+The backend application server handles API request management and coordinates application workflows:
+- **Technology Stack:** Python 3.10+ (utilizing frameworks like FastAPI or Flask).
+- **Core Responsibilities:**
+  - **Router & Auth Controller:** Matches HTTP endpoints, parses incoming JSON payloads, and validates JWT headers to block unauthorized users.
+  - **DICOM Handler:** Processes raw binary uploads, extracts patient information tags, writes files to local storage, and normalizes pixel data.
+  - **Report Compiler:** Packages patient details, model classification logs, and doctor feedback notes into secure, locked PDF files using the `ReportLab` library.
+
+### 4.4 AI Detection Layer
+The inference engine encapsulates the deep learning model pipeline:
+- **Technology Stack:** Python, PyTorch (Deep Learning framework), NumPy (tensor processing), and NVIDIA CUDA hardware drivers.
+- **Core Responsibilities:**
+  - **Model Weight Loader:** Pre-loads pre-trained convolutional neural network weights (e.g. ResNet/DenseNet) into GPU VRAM during system initialization to avoid model-loading latency during clinical diagnostic sessions.
+  - **Image Classifier:** Converts preprocessed pixel matrices into inference tensors, performs forward-pass computations, and outputs category softmax probabilities.
+  - **Object Detector:** Extracts final-layer activation coordinates to generate bounding boxes indicating anomalous regions.
+
+### 4.5 Database Layer
+This tier manages system persistence:
+- **Technology Stack:** SQLite (relational database engine) and Local Host Storage.
+- **Core Responsibilities:**
+  - **Relational Storage:** Maintains system schemas for user profiles, image metadata parameters, AI classification metrics, and PDF paths.
+  - **DICOM Storage Cache:** Secures original binary files on the host filesystem with access permissions restricted to the web backend process.
+
+### 4.6 Data Flow & Communication Model
+- **Client-to-Backend:** Communicates asynchronously over HTTPS using REST API guidelines with JSON-formatted payloads.
+- **Backend-to-AI-Layer:** Tensors are passed as normalized NumPy float arrays via internal Python memory references.
+- **Backend-to-Database:** Standard SQL queries executed via localized SQLite file database connections.
