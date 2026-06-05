@@ -150,7 +150,7 @@ flowchart TD
     GetBoxes --> DrawCanvas[Render Images and Overlays on Canvas]
     DrawCanvas --> DoctorReview{Doctor Reviewing?}
     DoctorReview -->|Reject / Modify| EditNotes[Edit Clinical Annotation Notes] --> DrawCanvas
-    DoctorReview -->|Approve & Sign off| CompilePDF[Assemble and Export PDF Report]
+    DoctorReview -->|Approve and Sign off| CompilePDF[Assemble and Export PDF Report]
     CompilePDF --> LockRecord[Lock Case Record state in DB] --> End
 ```
 
@@ -159,7 +159,6 @@ This structural diagram outlines object schemas, core system fields, operation t
 
 ```mermaid
 classDiagram
-    direction TB
     class User {
         +int UserID
         +String name
@@ -210,8 +209,7 @@ This interaction trace defines call structures and lifelines during scan uploads
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor User as Doctor/Radiologist
+    participant User as Doctor or Radiologist
     participant UI as Browser UI
     participant Server as Backend Server
     participant AI as AI Engine
