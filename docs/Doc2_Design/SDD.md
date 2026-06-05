@@ -92,3 +92,151 @@ To satisfy the functional requirements (FR-01 to FR-05) defined in the SRS, the 
   - *User Schema Manager:* Manages database profiles, password hashes, and access permissions.
   - *Image Metadata Manager:* Handles Patient IDs, dates, file locations, and status records.
   - *Results Schema Manager:* Manages category tags, confidence levels, and coordinate outputs.
+
+---
+
+## 3. Design Models & UML Diagrams
+
+We use standard Mermaid.js syntax to model system processes, structure, and database relations. These diagrams render natively within markdown-supported environments.
+
+### 3.1 Use Case Diagram
+This model maps permissions, boundaries, and system goals relative to the core client roles.
+
+```mermaid
+graph TD
+    subgraph Roles
+        Admin[Administrator]
+        Doc[Doctor]
+        Radio[Radiologist]
+    end
+
+    subgraph "System Boundary (Use Cases)"
+        UC1(User Authentication)
+        UC2(Upload DICOM Scans)
+        UC3(Run AI Inference)
+        UC4(View Scan & Annotations)
+        UC5(Edit Clinical Notes)
+        UC6(Sign off & Export PDF)
+        UC7(Manage Accounts)
+    end
+
+    Admin --> UC1
+    Admin --> UC7
+    Radio --> UC1
+    Radio --> UC2
+    Radio --> UC3
+    Radio --> UC4
+    Radio --> UC5
+    Doc --> UC1
+    Doc --> UC4
+    Doc --> UC5
+    Doc --> UC6
+```
+
+### 3.2 Activity Diagram
+This workflow describes the end-to-end data lifecycle from scan importation, classification, annotation editing, to report compilation.
+
+```mermaid
+flowchart TD
+    Start([Start Upload]) --> Upload[Upload DICOM File]
+    Upload --> CheckDICOM{Valid DICOM?}
+    CheckDICOM -->|No| ShowError[Display Error Toast] --> End([End])
+    CheckDICOM -->|Yes| ParseHeader[Extract Demographic Metadata]
+    ParseHeader --> Normalise[Normalize Pixel Array Tensors]
+    Normalise --> SaveDB[Save Metadata to Cache DB]
+    SaveDB --> TriggerModel[Invoke CNN Engine Inference]
+    TriggerModel --> GetScores[Generate Confidence Scores]
+    GetScores --> GetBoxes[Calculate Anomaly Bounding Boxes]
+    GetBoxes --> DrawCanvas[Render Images and Overlays on Canvas]
+    DrawCanvas --> DoctorReview{Doctor Reviewing?}
+    DoctorReview -->|Reject / Modify| EditNotes[Edit Clinical Annotation Notes] --> DrawCanvas
+    DoctorReview -->|Approve & Sign off| CompilePDF[Assemble and Export PDF Report]
+    CompilePDF --> LockRecord[Lock Case Record state in DB] --> End
+```
+
+### 3.3 Class Diagram
+This structural diagram outlines object schemas, core system fields, operation types, and their relationships.
+
+```mermaid
+classDiagram
+    direction TB
+    class User {
+        +int UserID
+        +String name
+        +String email
+        +String passwordHash
+        +String role
+        +login() bool
+        +logout() bool
+    }
+    class MedicalImage {
+        +int ImageID
+        +String PatientID
+        +String uploadDate
+        +String rawFilePath
+        +String pngFilePath
+        +String patientMetadata
+        +saveMetadata() bool
+        +preprocess() Array
+    }
+    class DetectionEngine {
+        +int engineID
+        +String modelWeightPath
+        +loadWeights() bool
+        +computeBoundingBoxes(Array tensor) Array
+    }
+    class ClassificationEngine {
+        +int engineID
+        +String modelWeightPath
+        +computeSoftmaxLogs(Array tensor) Array
+    }
+    class Report {
+        +int ReportID
+        +String comments
+        +bool isFinalized
+        +String signatureData
+        +compilePDF() bytes
+        +lockReport() bool
+    }
+    User "1" --> "many" MedicalImage : uploads
+    MedicalImage "1" --> "1" Report : documents
+    DetectionEngine ..> MedicalImage : processes
+    ClassificationEngine ..> MedicalImage : processes
+    User "1" --> "many" Report : signs_off
+```
+
+### 3.4 Sequence Diagram
+This interaction trace defines call structures and lifelines during scan uploads and prediction renders.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Doctor/Radiologist
+    participant UI as Browser UI
+    participant Server as Backend Server
+    participant AI as AI Engine
+    participant DB as SQLite DB
+
+    User->>UI: Selects scan & clicks Upload
+    UI->>Server: POST /api/images/upload (DICOM payload)
+    activate Server
+    Server->>Server: Validate file & extract metadata
+    Server->>DB: Save Patient details & image path
+    Server->>UI: HTTP 201 (Return Image ID & preprocessed PNG path)
+    deactivate Server
+    UI->>User: Renders preprocessed scan thumbnail
+
+    User->>UI: Click "Analyze Image"
+    UI->>Server: GET /api/predictions/{image_id}
+    activate Server
+    Server->>Server: Read scan array & normalize tensors
+    Server->>AI: Trigger inference (tensors array)
+    activate AI
+    AI->>AI: Compute softmax scores & bounding boxes
+    AI-->>Server: Return scores & spatial coordinates
+    deactivate AI
+    Server->>DB: Save prediction metrics & boxes
+    Server-->>UI: Return JSON results payload
+    deactivate Server
+    UI->>User: Draws bounding boxes & progress indicators on canvas
+```
