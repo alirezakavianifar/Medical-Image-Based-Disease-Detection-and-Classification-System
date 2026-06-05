@@ -11,7 +11,6 @@
 
 ```mermaid
 classDiagram
-    direction TB
 
     class User {
         +int userID

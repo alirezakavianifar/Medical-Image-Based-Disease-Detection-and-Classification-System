@@ -1,4 +1,4 @@
-# Entity Relationship Diagram (ERD) – Database Schema
+# Entity Relationship Diagram (ERD) - Database Schema
 ## Medical Image-Based Disease Detection and Classification System
 
 **Diagram Type:** Entity Relationship (ERD)  
@@ -12,43 +12,43 @@
 ```mermaid
 erDiagram
     USERS {
-        int user_id PK "AUTOINCREMENT"
-        string name "NOT NULL"
-        string email UK "UNIQUE, NOT NULL"
-        string password_hash "NOT NULL"
-        string role "Admin | Doctor | Radiologist"
-        datetime created_at "DEFAULT CURRENT_TIMESTAMP"
+        int user_id
+        string name
+        string email
+        string password_hash
+        string role
+        datetime created_at
     }
 
     IMAGES {
-        int image_id PK "AUTOINCREMENT"
-        string patient_id "NOT NULL"
-        string patient_name "NULLABLE"
-        date patient_dob "NULLABLE"
-        string modality "CT | MR | CR"
-        datetime upload_date "NOT NULL"
-        int uploaded_by_id FK "REFERENCES users"
-        string raw_file_path "NOT NULL"
-        string png_file_path "NOT NULL"
+        int image_id
+        string patient_id
+        string patient_name
+        date patient_dob
+        string modality
+        datetime upload_date
+        int uploaded_by_id
+        string raw_file_path
+        string png_file_path
     }
 
     RESULTS {
-        int result_id PK "AUTOINCREMENT"
-        int image_id FK "UNIQUE, REFERENCES images"
-        string disease_type "NOT NULL"
-        real confidence_score "0.0 to 1.0"
-        text bounding_box_coordinates "JSON Array"
-        datetime analyzed_at "DEFAULT CURRENT_TIMESTAMP"
+        int result_id
+        int image_id
+        string disease_type
+        real confidence_score
+        text bounding_box_coordinates
+        datetime analyzed_at
     }
 
     REPORTS {
-        int report_id PK "AUTOINCREMENT"
-        int image_id FK "UNIQUE, REFERENCES images"
-        int doctor_id FK "REFERENCES users"
-        text clinical_comments "NULLABLE"
-        boolean is_finalized "DEFAULT FALSE"
-        string pdf_file_path "NULLABLE"
-        datetime finalized_at "NULLABLE"
+        int report_id
+        int image_id
+        int doctor_id
+        text clinical_comments
+        boolean is_finalized
+        string pdf_file_path
+        datetime finalized_at
     }
 
     USERS ||--o{ IMAGES : "uploads"
@@ -58,6 +58,20 @@ erDiagram
 ```
 
 ---
+
+## Table Schema Details
+
+| Table | Column | Type | Constraint |
+| :--- | :--- | :--- | :--- |
+| `users` | `user_id` | INTEGER | PRIMARY KEY AUTOINCREMENT |
+| `users` | `email` | VARCHAR(100) | UNIQUE, NOT NULL |
+| `users` | `role` | VARCHAR(20) | Admin, Doctor, or Radiologist |
+| `images` | `image_id` | INTEGER | PRIMARY KEY AUTOINCREMENT |
+| `images` | `uploaded_by_id` | INTEGER | FOREIGN KEY → users.user_id |
+| `results` | `image_id` | INTEGER | UNIQUE FK → images.image_id |
+| `results` | `confidence_score` | REAL | Range 0.0 to 1.0 |
+| `reports` | `image_id` | INTEGER | UNIQUE FK → images.image_id |
+| `reports` | `is_finalized` | BOOLEAN | DEFAULT FALSE |
 
 ## Table Index Summary
 
@@ -73,3 +87,4 @@ erDiagram
 
 > [!NOTE]
 > This ERD is rendered via Mermaid.js. For print/export, save as `database_schema_erd.png`.
+> Field constraint details (PK, FK, NOT NULL) are listed in the table above since inline annotations are not supported in Mermaid v8.8.0.
