@@ -56,3 +56,55 @@ The system aims to achieve the following core objectives:
 3. **ISO 13485:** Medical devices — Quality management systems — Requirements for regulatory purposes.
 4. **Project Master Plan:** [plan.md](../../plan.md) - Project master schedule and deliverable requirements.
 5. **Documentation Standards:** [Documentation_Standards.md](../Documentation_Standards.md) - Naming conventions and style guidelines.
+
+---
+
+## 2. Overall Description
+
+### 2.1 Product Perspective
+The Medical Image-Based Disease Detection and Classification System operates as an autonomous web-based platform with a dedicated deep-learning inference backend. The system is designed to interface with DICOM source images, preprocess the visual payloads, feed them to a localized AI analysis server, and display output classification parameters on an interactive clinical dashboard.
+
+```mermaid
+graph TD
+    PACS[Hospital PACS / local files] -->|Upload DICOM| WebApp[Web Application Front-end]
+    WebApp -->|HTTP API POST /upload| Backend[Inference & Control Backend]
+    Backend -->|Raw Images| DLModel[AI Classification Engine]
+    DLModel -->|Disease Class & Bounding Boxes| Backend
+    Backend -->|JSON Prediction Data| WebApp
+    Backend -->|Save Metadata| SQLite[(SQLite Database)]
+```
+
+### 2.2 Product Functions
+The high-level capabilities of the system are categorized as follows:
+- **User Authentication and Administration:** Secure role-based login, session verification, and account profile controls.
+- **Image Importation and Preprocessing:** Reading multi-frame or single-frame DICOM slices, extracting patient metadata headers, and applying spatial rescaling, contrast adjustment, and noise filtering.
+- **Disease Area Detection:** Identifying bounding regions of pathological interest (e.g., lesions, tumors, fractures) and overlaying heatmap/bounding-box visual markers.
+- **Disease Multi-Class Classification:** Assisting diagnostic analysis by classifying scans into distinct clinical labels (e.g., Normal, Benign, Malignant) accompanied by statistical confidence levels.
+- **Dashboard Reporting & Audit trail:** Presenting visual overlays side-by-side with Patient IDs, demographic records, and confidence statistics.
+- **Diagnostic Exporting:** Building formatted summary reports in PDF format containing physician comments and signature fields.
+
+### 2.3 User Classes and Characteristics
+- **Administrators:** Responsible for system maintenance, user registration control, database backup, audit log review, and configuring system security levels.
+- **Radiologists:** Heavy-use clinical staff who upload scan archives, trigger model executions, examine visual bounding boxes, and formulate diagnosis drafts.
+- **Doctors:** Clinical recipients who retrieve cases, review the classification results and radiologists' notes, add final diagnosis annotations, and approve PDF reports.
+
+### 2.4 Operating Environment
+- **Server Infrastructure:**
+  - **Operating System:** Ubuntu 22.04 LTS or compatible server OS.
+  - **Runtime Runtime:** Python 3.10+ with PyTorch/TensorFlow.
+  - **Database:** SQLite for lightweight local caching, or PostgreSQL for enterprise-grade deployments.
+  - **Hardware acceleration:** NVIDIA CUDA-enabled GPU with >= 8GB VRAM.
+- **Client Interface:**
+  - Standard modern web browsers (Chrome 110+, Edge 110+, Firefox 105+, Safari 16+).
+  - Responsive layout designed for desktop display resolutions (>= 1280x720).
+
+### 2.5 Design and Implementation Constraints
+- **Regulatory Compliance:** Must adhere to data isolation and privacy mandates under HIPAA (Health Insurance Portability and Accountability Act) and GDPR.
+- **Image Dimensionality Limits:** Maximum size of uploaded DICOM batches is capped at 100MB per session to prevent backend memory overflows.
+- **Latency Boundaries:** Deep learning inference execution must compile and return scores within 5 seconds of the image upload completion.
+- **Accessibility:** Text elements and UI layouts must satisfy WCAG 2.1 AA web accessibility guidelines.
+
+### 2.6 Assumptions and Dependencies
+- **Data Integrity:** Uploaded medical images are assumed to conform to the standard DICOM metadata specifications without header corruption.
+- **Active Connection:** The system assumes constant backend availability and network connectivity for transferring image payloads from the web application interface.
+- **Pre-trained Weights:** The system depends on pre-trained neural network weights being correctly mounted and loaded into host VRAM at server startup.
