@@ -195,8 +195,89 @@ During the design and quality assurance cycles, several challenges were addresse
 ### Appendix B: Architectural UML Models
 System diagrams (Use Case, Activity, Class, Sequence) are rendered in [SDD Section 3](../Doc2_Design/SDD.md#3-design-models--uml-diagrams).
 
+Standalone diagram files are also maintained in the `diagrams/` directory:
+
+| Diagram Type | File |
+| :--- | :--- |
+| System Architecture (4-Tier Layers) | [architecture_system_layers.md](../../diagrams/architecture_system_layers.md) |
+| UML Use Case Diagram | [usecase_doctor_interaction.md](../../diagrams/usecase_doctor_interaction.md) |
+| UML Activity Diagram (Workflow) | [activity_preprocess_workflow.md](../../diagrams/activity_preprocess_workflow.md) |
+| UML Class Diagram | [class_detection_engine.md](../../diagrams/class_detection_engine.md) |
+| UML Sequence Diagram | [sequence_image_upload.md](../../diagrams/sequence_image_upload.md) |
+| Database ERD Schema | [database_schema_erd.md](../../diagrams/database_schema_erd.md) |
+| Project Gantt Chart | [gantt_project_timeline.md](../../diagrams/gantt_project_timeline.md) |
+
 ### Appendix C: Peer Review & Inspection Logs
 Review logs and audit trails are documented in:
 - [SRS Review Log](../../reviews/SRS_Review_Log.md)
 - [SDD Review Log](../../reviews/SDD_Review_Log.md)
 - [User/Deployment Validation Report](../../reviews/User_Validation_Report.md)
+- [Final Report Review Log](../../reviews/Final_Report_Review_Log.md)
+
+### Appendix D: Git Version Control Outputs
+
+Below is the complete annotated branch-graph log representing the full project documentation lifecycle as committed and merged into the repository:
+
+```text
+*   94ab6f7 INFRA: Merge develop into main for final project v1.0-FINAL release
+|\  
+| *   24777ae INFRA: Merge final-report into develop
+| |\  
+| | * 2aad5f2 REPORT: Finalized Final Report delivery status checkmarks
+| | * 510238e REPORT: Added Final Report peer review and audit approval log
+| | * 875bf35 REPORT: Appended Final Report structure including activities, VC details, challenges, and status
+| | * aec6569 REPORT: Initialized Final Report and compiled project artifacts catalog
+| |/  
+| * 0c81f1d INFRA: Added Pull Request process guide and GitHub templates
+| * 4a3ca66 INFRA: Added Documentation Quality Assurance and Review Plan
+* | f46eb2a INFRA: Merge develop into main for DOC3 v1.0-DOC3 baseline
+|\|
+| *   cd24304 INFRA: Merge doc3-userguide into develop
+| |\  
+| | * d017b8d DOC3: Added User Validation and Verification log report
+| | * a2fea0a DOC3: Created OpenAPI REST API specifications reference guide
+| | * 93a9c50 DOC3: Created QA Test Verification and Report manual
+| | * 3ba5387 DOC3: Created Installation and Deployment Guide
+| | * 9e14049 DOC3: Created clinical User Manual guide
+| | * 1d1aa1c DOC3: Initialized Phase 4 with documentation type index
+| |/  
+* | 2e7ce26 INFRA: Merge develop into main for SDD v1.0-SDD baseline
+|\|
+| *   e229e63 INFRA: Merge doc2-design into develop
+| |\  
+| | * 4f2c8bb DOC2: Added SDD peer review and architectural inspection log
+| | * 2837a68 DOC2: Added Section 7 user interface and API specifications to SDD
+| | * a07f74c DOC2: Added Section 5 database design and indices schema to SDD
+| | * 4743edf DOC2: Added Section 4 system architecture to SDD
+| | * ee2ceb0 DOC2: Added Mermaid UML diagrams to SDD
+| | * e17a956 DOC2: Initialized SDD document with introduction and component decomposition
+| |/  
+* | a377015 INFRA: Merge develop into main for SRS v1.0-SRS baseline
+|\|
+| *   a8fd223 INFRA: Merge doc1-requirements into develop
+| |\  
+| | * f754d3a DOC1: Added SRS peer review and inspection approval log
+| | * 6059822 DOC1: Added detailed functional, non-functional, and interface requirements
+| | * e4d75b7 DOC1: Added Section 2 overall description to SRS
+| | * 4273668 DOC1: Initialized SRS document with purpose, audience, objectives, scope, and references
+| |/  
+| * a58d3ad INFRA: Added documentation and repository standards guide
+|/  
+* 6d9b30b Initialize project structure and configuration
+```
+
+**Release Tags Issued:**
+
+| Tag | Associated Commit Area | Description |
+| :--- | :--- | :--- |
+| `v1.0-SRS` | doc1-requirements → develop → main | Software Requirements Specification baseline |
+| `v1.0-SDD` | doc2-design → develop → main | System Design Document baseline |
+| `v1.0-DOC3` | doc3-userguide → develop → main | User, Installation & Test Documentation baseline |
+| `v1.0-FINAL` | final-report → develop → main | Final delivery project archive |
+
+### Appendix E: Reusable Document Templates
+Document templates for future projects or revisions are stored in the `templates/` directory:
+- [SRS_Template.md](../../templates/SRS_Template.md) – IEEE 830-aligned SRS structure template
+- [SDD_Template.md](../../templates/SDD_Template.md) – Full architecture, UML, DB, and API design template
+- [Review_Log_Template.md](../../templates/Review_Log_Template.md) – Peer review inspection log template
+- [Final_Report_Template.md](../../templates/Final_Report_Template.md) – Final project report template
