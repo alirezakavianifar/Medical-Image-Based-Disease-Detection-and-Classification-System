@@ -10,35 +10,36 @@
 ## 8-Week Project Gantt Chart
 
 ```mermaid
+%%{init: { 'gantt': { 'leftPadding': 130 } } }%%
 gantt
     title Medical Image Disease Detection - Documentation Timeline
     dateFormat  YYYY-MM-DD
     axisFormat  %b %d
 
-    section Week 1 - Setup
-    Project Charter and Git Repository      :2026-01-05, 4d
-    Documentation Standards Definition      :2026-01-08, 3d
+    section Setup (W1)
+    Charter & Git Setup                     :2026-01-05, 4d
+    Standards Definition                    :2026-01-08, 3d
 
-    section Week 2-3 - Requirements
-    Requirements Gathering and SRS Draft    :2026-01-12, 7d
-    SRS Peer Review and Approval            :2026-01-19, 4d
+    section Reqs (W2-3)
+    SRS Requirements Draft                  :2026-01-12, 7d
+    SRS Peer Review                         :2026-01-19, 4d
     RELEASE v1.0-SRS                        :crit, 2026-01-23, 1d
 
-    section Week 4-5 - System Design
-    UML Diagrams and Architecture Design    :2026-01-26, 8d
-    SDD Peer Review and Approval            :2026-02-03, 5d
+    section Design (W4-5)
+    UML Diagrams & Design                   :2026-01-26, 8d
+    SDD Peer Review                         :2026-02-03, 5d
     RELEASE v1.0-SDD                        :crit, 2026-02-08, 1d
 
-    section Week 6-7 - Documentation
-    User Manual and Installation Guide      :2026-02-09, 7d
-    Test Report and API Documentation       :2026-02-16, 5d
+    section Manuals (W6-7)
+    User & Install Guides                   :2026-02-09, 7d
+    Test Report & API Spec                  :2026-02-16, 5d
     RELEASE v1.0-DOC3                       :crit, 2026-02-21, 1d
 
-    section Week 7 - Quality Assurance
-    QA Plan and PR Workflow Templates       :2026-02-16, 7d
+    section QA (W7)
+    QA & PR Templates                       :2026-02-16, 7d
 
-    section Week 8 - Final Report
-    Final Report and Project Archive        :2026-02-23, 7d
+    section Report (W8)
+    Final Report & Archive                  :2026-02-23, 7d
     RELEASE v1.0-FINAL                      :crit, 2026-03-02, 1d
 ```
 
