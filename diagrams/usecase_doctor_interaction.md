@@ -11,19 +11,24 @@
 
 ```mermaid
 graph TD
-    Admin(["Administrator"])
-    Doctor(["Doctor"])
-    Radiologist(["Radiologist"])
+    classDef actor fill:#1a73e8,stroke:#0d47a1,color:#ffffff
+    classDef uc fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    classDef ucAdmin fill:#e3f2fd,stroke:#1a73e8,color:#0d47a1
+    classDef ucClinical fill:#fff8e1,stroke:#f9a825,color:#4a3000
+
+    Admin(["Administrator"]):::actor
+    Doctor(["Doctor"]):::actor
+    Radiologist(["Radiologist"]):::actor
 
     subgraph "Medical Image Classification System"
-        UC1("UC-01: Authenticate and Login")
-        UC2("UC-02: Upload DICOM Image")
-        UC3("UC-03: Run AI Inference")
-        UC4("UC-04: View Scan and Annotations")
-        UC5("UC-05: Edit Clinical Notes")
-        UC6("UC-06: Sign Off and Export PDF Report")
-        UC7("UC-07: Manage User Accounts")
-        UC8("UC-08: View Audit Logs")
+        UC1("UC-01: Authenticate and Login"):::uc
+        UC2("UC-02: Upload DICOM Image"):::ucClinical
+        UC3("UC-03: Run AI Inference"):::ucClinical
+        UC4("UC-04: View Scan and Annotations"):::ucClinical
+        UC5("UC-05: Edit Clinical Notes"):::ucClinical
+        UC6("UC-06: Sign Off and Export PDF Report"):::ucClinical
+        UC7("UC-07: Manage User Accounts"):::ucAdmin
+        UC8("UC-08: View Audit Logs"):::ucAdmin
     end
 
     Admin --- UC1
@@ -43,6 +48,15 @@ graph TD
 ```
 
 ---
+
+## Color Legend
+
+| Color | Meaning |
+| :--- | :--- |
+| 🔵 Blue (filled) | System actors (users) |
+| 🟢 Green (outline) | Shared use cases (all roles) |
+| 🔵 Blue (outline) | Administrator-only use cases |
+| 🟡 Amber | Clinical workflow use cases |
 
 ## Use Case Descriptions
 
