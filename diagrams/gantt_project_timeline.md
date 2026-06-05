@@ -11,50 +11,50 @@
 
 ```mermaid
 gantt
-    title Medical Image Disease Detection – Documentation Project Timeline
+    title Medical Image Disease Detection - Documentation Project Timeline
     dateFormat  YYYY-MM-DD
     axisFormat  %b %d
 
-    section Phase 1: Project Initialization
-    Project Charter & Scope Definition     :done, p1a, 2026-04-01, 3d
-    Git Repository Setup & Configuration   :done, p1b, after p1a, 2d
-    Documentation Standards Definition     :done, p1c, after p1b, 2d
+    section Phase 1 - Initialization
+    Project Charter and Scope Definition     :done, 2026-04-01, 3d
+    Git Repository Setup and Configuration   :done, 2026-04-04, 2d
+    Documentation Standards Definition       :done, 2026-04-06, 2d
 
-    section Phase 2: Requirements (SRS)
-    Stakeholder Interviews & Review        :done, p2a, 2026-04-08, 3d
-    SRS Drafting – Sections 1 & 2         :done, p2b, after p2a, 2d
-    SRS Drafting – Functional Requirements :done, p2c, after p2b, 2d
-    SRS Drafting – Non-Functional & Interfaces :done, p2d, after p2c, 2d
-    SRS Peer Review & Approval            :done, p2e, after p2d, 2d
-    Git Tag: v1.0-SRS                     :milestone, m1, after p2e, 0d
+    section Phase 2 - Requirements SRS
+    Stakeholder Interviews and Review        :done, 2026-04-08, 3d
+    SRS Drafting Sections 1 and 2            :done, 2026-04-11, 2d
+    SRS Drafting Functional Requirements     :done, 2026-04-13, 2d
+    SRS Drafting Non-Functional Items        :done, 2026-04-15, 2d
+    SRS Peer Review and Approval             :done, 2026-04-17, 2d
+    RELEASE v1.0-SRS                         :crit, done, 2026-04-19, 1d
 
-    section Phase 3: System Design (SDD)
-    UML Use Case & Activity Diagrams       :done, p3a, 2026-04-22, 3d
-    Class Diagram & Sequence Diagram       :done, p3b, after p3a, 2d
-    4-Tier Architecture Definition         :done, p3c, after p3b, 2d
-    Database ERD & Schema Specification    :done, p3d, after p3c, 2d
-    API Endpoint Contracts                 :done, p3e, after p3d, 2d
-    SDD Peer Review & Approval             :done, p3f, after p3e, 2d
-    Git Tag: v1.0-SDD                      :milestone, m2, after p3f, 0d
+    section Phase 3 - System Design SDD
+    UML Use Case and Activity Diagrams       :done, 2026-04-22, 3d
+    Class Diagram and Sequence Diagram       :done, 2026-04-25, 2d
+    4-Tier Architecture Definition           :done, 2026-04-27, 2d
+    Database ERD and Schema Specification    :done, 2026-04-29, 2d
+    API Endpoint Contracts                   :done, 2026-05-01, 2d
+    SDD Peer Review and Approval             :done, 2026-05-03, 2d
+    RELEASE v1.0-SDD                         :crit, done, 2026-05-05, 1d
 
-    section Phase 4: User & Test Documentation
-    User Manual Drafting                   :done, p4a, 2026-05-13, 3d
-    Installation & Deployment Guide        :done, p4b, after p4a, 2d
-    Test Case Specifications & Execution   :done, p4c, after p4b, 3d
-    API Reference (OpenAPI / Swagger)      :done, p4d, after p4c, 2d
-    User Validation Role-Play              :done, p4e, after p4d, 2d
-    Git Tag: v1.0-DOC3                     :milestone, m3, after p4e, 0d
+    section Phase 4 - User and Test Docs
+    User Manual Drafting                     :done, 2026-05-13, 3d
+    Installation and Deployment Guide        :done, 2026-05-16, 2d
+    Test Case Specifications and Execution   :done, 2026-05-18, 3d
+    API Reference OpenAPI Swagger            :done, 2026-05-21, 2d
+    User Validation Role-Play                :done, 2026-05-23, 2d
+    RELEASE v1.0-DOC3                        :crit, done, 2026-05-25, 1d
 
-    section Phase 5: Quality Assurance
-    Documentation QA Plan & RTM           :done, p5a, 2026-05-27, 2d
-    Pull Request Process Guide             :done, p5b, after p5a, 2d
-    GitHub PR Template Implementation      :done, p5c, after p5b, 1d
+    section Phase 5 - Quality Assurance
+    Documentation QA Plan and RTM            :done, 2026-05-27, 2d
+    Pull Request Process Guide               :done, 2026-05-29, 2d
+    GitHub PR Template Implementation        :done, 2026-05-31, 1d
 
-    section Phase 6: Final Report & Release
-    Final Report Drafting                  :done, p6a, 2026-06-03, 2d
-    Final Report Peer Review               :done, p6b, after p6a, 1d
-    Repository Archival & Release Tag      :done, p6c, after p6b, 1d
-    Git Tag: v1.0-FINAL                    :milestone, m4, after p6c, 0d
+    section Phase 6 - Final Report
+    Final Report Drafting                    :done, 2026-06-03, 2d
+    Final Report Peer Review                 :done, 2026-06-05, 1d
+    Repository Archival and Release Tag      :done, 2026-06-06, 1d
+    RELEASE v1.0-FINAL                       :crit, done, 2026-06-06, 1d
 ```
 
 ---
