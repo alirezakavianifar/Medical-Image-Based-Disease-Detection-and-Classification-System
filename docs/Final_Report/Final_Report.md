@@ -169,7 +169,7 @@ During the design and quality assurance cycles, several challenges were addresse
 - [x] Documentation QA Plan & Traceability Matrix (`reviews/Documentation_QA_Plan.md`) -> **Complete**
 - [x] Pull Request workflows guide (`reviews/Pull_Request_Process.md`) -> **Complete**
 - [x] GitHub Pull Request GFM Template (`.github/pull_request_template.md`) -> **Complete**
-- [/] Final Project Report (`docs/Final_Report/Final_Report.md`) -> **In Progress** (Awaiting Final Release)
+- [x] Final Project Report (`docs/Final_Report/Final_Report.md`) -> **Complete**
 
 ### 7.2 Future Improvements
 - **Integration of HL7 / FHIR Standards:** Future backend iterations should incorporate standard healthcare communication protocols to link directly to clinical PACS databases.
@@ -190,7 +190,7 @@ During the design and quality assurance cycles, several challenges were addresse
 | **Week 5** | SDD review and approval | Baseline SDD document, review checklist logs (`v1.0-SDD`) | **PASSED** |
 | **Week 6** | User, installation, and test documentation | Clinical manual, install guide, test cases, OpenAPI specs | **PASSED** |
 | **Week 7** | Documentation reviews and revisions | Validation role-play reports, QA plan, PR templates (`v1.0-DOC3`) | **PASSED** |
-| **Week 8** | Final report, release tagging, project archive | Final report, release tag merge to main (`v1.0-FINAL`) | **IN PROGRESS** |
+| **Week 8** | Final report, release tagging, project archive | Final report, release tag merge to main (`v1.0-FINAL`) | **PASSED** |
 
 ### Appendix B: Architectural UML Models
 System diagrams (Use Case, Activity, Class, Sequence) are rendered in [SDD Section 3](../Doc2_Design/SDD.md#3-design-models--uml-diagrams).
